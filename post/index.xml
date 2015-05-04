@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on G.Scacco</title>
+    <link>http://localhost:1313/post/</link>
+    <description>Recent content in Posts on G.Scacco</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>it-it</language>
+    <lastBuildDate>Mon, 04 May 2015 12:35:03 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>hugo - Static Site Generator</title>
+      <link>http://localhost:1313/post/hugo/</link>
+      <pubDate>Mon, 04 May 2015 12:35:03 +0200</pubDate>
+      
+      <guid>http://localhost:1313/post/hugo/</guid>
+      <description>
+
+&lt;h1 id=&#34;hugo:32ab7241d48fcc174c877413a917f8cf&#34;&gt;hugo&lt;/h1&gt;
+
+&lt;p&gt;WordPress, Joomla, Drupal, etc. Insomma i &lt;em&gt;Content Management Systems&lt;/em&gt;. Cosa hanno in comune tutti questi software ? Tutti sono siti web dinamici e quindi fanno uso di un db (MySql) come store degli articoli.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
