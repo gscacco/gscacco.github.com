@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web on G.Scacco</title>
+    <link>http://gscacco.github.io/tags/web/</link>
+    <description>Recent content in Web on G.Scacco</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>it-it</language>
+    <lastBuildDate>Mon, 04 May 2015 12:35:03 +0200</lastBuildDate>
+    <atom:link href="http://gscacco.github.io/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>hugo - Static Site Generator</title>
+      <link>http://gscacco.github.io/post/hugo/</link>
+      <pubDate>Mon, 04 May 2015 12:35:03 +0200</pubDate>
+      
+      <guid>http://gscacco.github.io/post/hugo/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduzione:32ab7241d48fcc174c877413a917f8cf&#34;&gt;Introduzione&lt;/h2&gt;
+
+&lt;p&gt;I &lt;em&gt;Content Management Systems&lt;/em&gt; (CMS) comunemente utilizzati dai bloggers sono applicazioni web basate su un db (generalmente MySql) ed implementate in un linguaggio di programmazione di alto livello: php, java, c#, etc.&lt;/p&gt;
+
+&lt;p&gt;Il db rappresenta la base dati dentro la quale vengono inseriti gli articoli, le pagine e le altre informazioni necessarie al funzionamento del CMS.&lt;/p&gt;
+
+&lt;p&gt;Quando un utente accede tramite il suo browser al sito web, il web server esegue esegue i seguenti passi elementari:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;analisi della richiesta&lt;/li&gt;
+&lt;li&gt;accesso e query al db&lt;/li&gt;
+&lt;li&gt;generazione di una pagina html&lt;/li&gt;
+&lt;li&gt;invio della pagina generata&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tutto questo ha un costo non banale in termini di cpu, ram ed io: al crescere del numero degli utenti connessi devono di conseguenza crescere le risorse impiegate.&lt;/p&gt;
+
+&lt;p&gt;Il mercato ha dato un prezzo a questa necessità e i vari providers (aruba, hostgator, etc.) richiedono il pagamento di un abbonamento annuale a costo crescente in base alle performances richieste.&lt;/p&gt;
+
+&lt;p&gt;Ma tutte queste performances servono &lt;em&gt;veramente&lt;/em&gt; ?&lt;/p&gt;
+
+&lt;p&gt;Generare ogni volta al volo le pagine html degli articoli è veramente necessario o si potrebbero generare una volta per tutte staticamente ?&lt;/p&gt;
+
+&lt;p&gt;La risposta sono gli &lt;em&gt;Static Site Generators&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;la-soluzione-hugo:32ab7241d48fcc174c877413a917f8cf&#34;&gt;La soluzione hugo&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://gohugo.io&#34;&gt;hugo&lt;/a&gt; è uno Static Site Generator scritto in go. Le sue caratteristiche fondamentali sono le seguenti:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Velocità nel rendering statico delle pagine&lt;/li&gt;
+&lt;li&gt;Semplicità di utilizzo&lt;/li&gt;
+&lt;li&gt;Portabilità (gira praticamente su tutte le piattaforme)&lt;/li&gt;
+&lt;li&gt;Flessibilità&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ma soprattutto è open source (SimPL-2.0).&lt;/p&gt;
+
+&lt;p&gt;Su arch esiste un pacchetto AUR e quindi per istallarlo basta eseguire:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ yaourt hugo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A questo punto creare un blog è molto semplice:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir my-blog
+$ cd my-blog
+$ hugo new site .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All&amp;rsquo;interno della cartella my-blog sarà presente un file di configurazione del sito web: config.toml. Questo file va modificato in accordo alle esigenze del caso. Il contenuto del file è abbastanza semplice ed autoesplicativo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;baseurl = &amp;quot;http://yourSiteHere/&amp;quot;
+languageCode = &amp;quot;en-us&amp;quot;
+title = &amp;quot;My New Hugo Site&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A questo punto possiamo aggiungere il primo post del blog con il seguente comando:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hugo new post/primoarticolo.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Il comando produrrà il seguente file markdown:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;+++
+date = &amp;quot;2015-05-05T11:44:32+02:00&amp;quot;
+draft = true
+title = &amp;quot;prova&amp;quot;
+
++++
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;L&amp;rsquo;unico parametro &lt;em&gt;funzionale&lt;/em&gt; dell&amp;rsquo;intestazione è &lt;em&gt;draft&lt;/em&gt;: se true hugo non lo inserirà nel sito generato. Il contenuto dell&amp;rsquo;articolo dovrà essere inserito dopo l&amp;rsquo;intestazione e quindi dopo l&amp;rsquo;ultimo +++.&lt;/p&gt;
+
+&lt;p&gt;hugo è skinnable con diversi temi disponibili su github. Per utilizzarli basta eseguire il seguente comando:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone --recursive https://github.com/spf13/hugoThemes themes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;L&amp;rsquo;applicazione fornisce un piccolo server web che consente la preview del sito. Per attivarlo basta eseguire:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hugo server --theme=shiori --buildDrafts
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;L&amp;rsquo;opzione theme consente di scegliere il tema mentre buildDrafts dice a hugo di presentare anche gli articoli con il parametro draft impostato a true.&lt;/p&gt;
+
+&lt;p&gt;Una volta completato l&amp;rsquo;articolo si può generare il sito web definitivo con il comando:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hugo -t shiori
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Dopo questo comando la cartella public conterrà i files pronti per essere pubblicati.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
