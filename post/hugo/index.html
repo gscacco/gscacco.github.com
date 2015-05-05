@@ -61,9 +61,98 @@
                     <section>
                         
 
-<h1 id="hugo:32ab7241d48fcc174c877413a917f8cf">hugo</h1>
+<h2 id="introduzione:32ab7241d48fcc174c877413a917f8cf">Introduzione</h2>
 
-<p>WordPress, Joomla, Drupal, etc. Insomma i <em>Content Management Systems</em>. Cosa hanno in comune tutti questi software ? Tutti sono siti web dinamici e quindi fanno uso di un db (MySql) come store degli articoli.</p>
+<p>I <em>Content Management Systems</em> (CMS) comunemente utilizzati dai bloggers sono applicazioni web basate su un db (generalmente MySql) ed implementate in un linguaggio di programmazione di alto livello: php, java, c#, etc.</p>
+
+<p>Il db rappresenta la base dati dentro la quale vengono inseriti gli articoli, le pagine e le altre informazioni necessarie al funzionamento del CMS.</p>
+
+<p>Quando un utente accede tramite il suo browser al sito web, il web server esegue esegue i seguenti passi elementari:</p>
+
+<ol>
+<li>analisi della richiesta</li>
+<li>accesso e query al db</li>
+<li>generazione di una pagina html</li>
+<li>invio della pagina generata</li>
+</ol>
+
+<p>Tutto questo ha un costo non banale in termini di cpu, ram ed io: al crescere del numero degli utenti connessi devono di conseguenza crescere le risorse impiegate.</p>
+
+<p>Il mercato ha dato un prezzo a questa necessità e i vari providers (aruba, hostgator, etc.) richiedono il pagamento di un abbonamento annuale a costo crescente in base alle performances richieste.</p>
+
+<p>Ma tutte queste performances servono <em>veramente</em> ?</p>
+
+<p>Generare ogni volta al volo le pagine html degli articoli è veramente necessario o si potrebbero generare una volta per tutte staticamente ?</p>
+
+<p>La risposta sono gli <em>Static Site Generators</em>.</p>
+
+<h2 id="la-soluzione-hugo:32ab7241d48fcc174c877413a917f8cf">La soluzione hugo</h2>
+
+<p><a href="http://gohugo.io">hugo</a> è uno Static Site Generator scritto in go. Le sue caratteristiche fondamentali sono le seguenti:</p>
+
+<ul>
+<li>Velocità nel rendering statico delle pagine</li>
+<li>Semplicità di utilizzo</li>
+<li>Portabilità (gira praticamente su tutte le piattaforme)</li>
+<li>Flessibilità</li>
+</ul>
+
+<p>Ma soprattutto è open source (SimPL-2.0).</p>
+
+<p>Su arch esiste un pacchetto AUR e quindi per istallarlo basta eseguire:</p>
+
+<pre><code>$ yaourt hugo
+</code></pre>
+
+<p>A questo punto creare un blog è molto semplice:</p>
+
+<pre><code>$ mkdir my-blog
+$ cd my-blog
+$ hugo new site .
+</code></pre>
+
+<p>All&rsquo;interno della cartella my-blog sarà presente un file di configurazione del sito web: config.toml. Questo file va modificato in accordo alle esigenze del caso. Il contenuto del file è abbastanza semplice ed autoesplicativo:</p>
+
+<pre><code>baseurl = &quot;http://yourSiteHere/&quot;
+languageCode = &quot;en-us&quot;
+title = &quot;My New Hugo Site&quot;
+</code></pre>
+
+<p>A questo punto possiamo aggiungere il primo post del blog con il seguente comando:</p>
+
+<pre><code>$ hugo new post/primoarticolo.md
+</code></pre>
+
+<p>Il comando produrrà il seguente file markdown:</p>
+
+<pre><code>+++
+date = &quot;2015-05-05T11:44:32+02:00&quot;
+draft = true
+title = &quot;prova&quot;
+
++++
+</code></pre>
+
+<p>L&rsquo;unico parametro <em>funzionale</em> dell&rsquo;intestazione è <em>draft</em>: se true hugo non lo inserirà nel sito generato. Il contenuto dell&rsquo;articolo dovrà essere inserito dopo l&rsquo;intestazione e quindi dopo l&rsquo;ultimo +++.</p>
+
+<p>hugo è skinnable con diversi temi disponibili su github. Per utilizzarli basta eseguire il seguente comando:</p>
+
+<pre><code>$ git clone --recursive https://github.com/spf13/hugoThemes themes
+</code></pre>
+
+<p>L&rsquo;applicazione fornisce un piccolo server web che consente la preview del sito. Per attivarlo basta eseguire:</p>
+
+<pre><code>$ hugo server --theme=shiori --buildDrafts
+</code></pre>
+
+<p>L&rsquo;opzione theme consente di scegliere il tema mentre buildDrafts dice a hugo di presentare anche gli articoli con il parametro draft impostato a true.</p>
+
+<p>Una volta completato l&rsquo;articolo si può generare il sito web definitivo con il comando:</p>
+
+<pre><code>$ hugo -t shiori
+</code></pre>
+
+<p>Il risultato sarà presente nella cartella public.</p>
 
                     </section>
                 </article>
