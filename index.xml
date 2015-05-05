@@ -108,7 +108,7 @@ title = &amp;quot;prova&amp;quot;
 &lt;pre&gt;&lt;code&gt;$ hugo -t shiori
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Il risultato sarà presente nella cartella public.&lt;/p&gt;
+&lt;p&gt;Dopo questo comando la cartella public conterrà i files pronti per essere pubblicati.&lt;/p&gt;
 </description>
     </item>
     
