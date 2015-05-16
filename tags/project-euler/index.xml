@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Project Euler on G.Scacco</title>
+    <link>http://gscacco.github.io/tags/project-euler/</link>
+    <description>Recent content in Project Euler on G.Scacco</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>it-it</language>
+    <lastBuildDate>Tue, 12 May 2015 14:31:23 +0200</lastBuildDate>
+    <atom:link href="http://gscacco.github.io/tags/project-euler/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Project Euler - Problema 1</title>
+      <link>http://gscacco.github.io/post/peuler1/</link>
+      <pubDate>Tue, 12 May 2015 14:31:23 +0200</pubDate>
+      
+      <guid>http://gscacco.github.io/post/peuler1/</guid>
+      <description>
+
+&lt;h1 id=&#34;project-euler:4267fac4619cf7d01f2cdbc9ec8918bf&#34;&gt;Project Euler&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://projecteuler.net/&#34;&gt;Project Euler&lt;/a&gt; è un interessantissimo sito web contenente una raccolta di problemi. Si tratta di sfide matematiche ed informatiche da risolvere tramite l&amp;rsquo;uso di un linguaggio di programmazione a scelta. Molti sono gli utenti registrati che si sono impegnati nelle varie soluzioni e nei più disparati linguaggi: si va dal lingiaggio macchia a Java, dal c++ al lisp, etc.&lt;/p&gt;
+
+&lt;p&gt;Vorrei proporvi in questo post (e spero in altri) le mie soluzioni in clojure.&lt;/p&gt;
+
+&lt;p&gt;Darò per scontata una conoscenza base del linguaggio &lt;a href=&#34;http://clojure.org/&#34;&gt;clojure&lt;/a&gt; e la conoscenza del tool &lt;a href=&#34;http://leiningen.org/&#34;&gt;Leingen&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;multipli-di-3-e-5:4267fac4619cf7d01f2cdbc9ec8918bf&#34;&gt;Multipli di 3 e 5&lt;/h2&gt;
+
+&lt;p&gt;Il &lt;a href=&#34;https://projecteuler.net/problem=1&#34;&gt;problema&lt;/a&gt; è così definito:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+Find the sum of all the multiples of 3 or 5 below 1000.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In italiano:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Se elenchiamo tutti i numeri naturali inferiori a 10 che sono multipli di 3 o di 5 otteniamo 3, 5, 6 e 9. La somma di questi multipli è 23.
+Trova la somma di tutti i multipli di 3 e 5 inferiori a 1000.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lanciamo la consolle repl di clojure tramite il comando:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ lein repl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Possiamo verificare se un numero è multiplo di un altro in clojure utilizzando la funzione &lt;em&gt;rem&lt;/em&gt; (resto della divisione intera).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user=&amp;gt; (rem 15 5)
+0
+user=&amp;gt; (rem 15 6)
+3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nel primo caso essendo 15 multiplo di 5 il risultato è 0; nel secondo 15 non è multiplo di 6 ed il risultato è 3 (il resto della divisione intera tra 15 e 6).&lt;/p&gt;
+
+&lt;p&gt;In clojure esiste il predicato &lt;em&gt;zero?&lt;/em&gt; che torna true solo se il suo argomento è 0, false altrimenti:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user=&amp;gt; (zero? 0)
+true
+user=&amp;gt; (zero? 9)
+false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A questo punto possiamo definire la nostra prima funzione:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user=&amp;gt; (defn multiplo? [n d] (zero? (rem n d)))
+user=&amp;gt; (multiplo? 15 5)
+true
+user=&amp;gt; (multiplo? 15 6)
+false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;E per concludere:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user=&amp;gt; (defn multiplo-di-tre-o-cinque? [n] (or (multiplo? n 3) (multiplo? n 5)))
+user=&amp;gt; (multiplo-di-tre-o-cinque? 6)
+true
+user=&amp;gt; (multiplo-di-tre-o-cinque? 10)
+true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Possiamo generare la lista dei numeri interi utilizzando la funzione &lt;em&gt;range&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user=&amp;gt; (range 2 10)
+(2 3 4 5 6 7 8 9)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;e filtrare in base al nostro predicato &lt;em&gt;multiplo-di-tre-o-cinque?&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user=&amp;gt; (filter multiplo-di-tre-o-cinque? (range 2 10))
+(3 5 6 9)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;fare la somma di una lista è semplice:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user=&amp;gt; (reduce + (filter multiplo-di-tre-o-cinque? (range 2 10)))
+23
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In questo modo abbiamo riottenuto il valore proposto nel caso semplice nella definizione del problema. Meglio definire, una funzione:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user=&amp;gt; (defn eulero-p1 [max] (reduce + (filter multiplo-di-tre-o-cinque? (range 2 max))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Siamo arrivati alla fine:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user=&amp;gt; (eulero-p1 1000)
+233168
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Quindi, in sintesi:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn- multiplo? [n d]
+  (zero? (rem n d)))
+
+(defn- multiplo-di-tre-o-cinque? [n]
+  (or
+   (multiplo? n 3)
+   (multiplo? n 5)))
+
+(defn eulero-p1 [max]
+  (reduce + (filter multiplo-di-tre-o-cinque? (range 2 max))))
+
+(eulero-p1 1000)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
