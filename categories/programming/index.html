@@ -1,217 +1,153 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programming &middot; G.Scacco</title>
+  <title>
+    Programming // G.Scacco
+  </title>
 
-    <meta name="description" content="">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <meta name="twitter:card" content="summary">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+
+  <meta property="og:title" content="Programming" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://gscacco.github.io/categories/programming/" />
+
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/base-min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://gscacco.github.io//css/redlounge.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,200,100,700,300,500,600,800' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://gscacco.github.io/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://gscacco.github.io/favicon.png">
+
+  
+  <link href="http://gscacco.github.io/categories/programming/index.xml" rel="alternate" type="application/rss+xml" title="G.Scacco" />
+
     
-    <meta name="twitter:title" content="Programming &middot; G.Scacco">
-    <meta name="twitter:description" content="">
-
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Programming &middot; G.Scacco">
-    <meta property="og:description" content="">
-
-    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
-    
-    
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
-    
-
-    <link rel="stylesheet" href="http://gscacco.github.io//css/all.min.css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
-	<script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-</head>
-<body>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/tomorrow-night-bright.min.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 
 
-<div id="layout" class="pure-g">
-    <div class="sidebar pure-u-1 pure-u-md-1-4">
-    <div class="header">
-        <hgroup>
-            <h1 class="brand-title"><a href="http://gscacco.github.io/">G.Scacco</a></h1>
-            <h2 class="brand-tagline"></h2>
-        </hgroup>
+  
 
-        <nav class="nav">
-            <ul class="nav-list">
-                
-                
-            </ul>
-        </nav>
-    </div>
-</div>
+  
 
-    <div class="content pure-u-1 pure-u-md-3-4">
-        <div>
-            
-            <div class="posts">
-                
-                <h1 class="content-subhead">12 May 2015, 14:31</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="http://gscacco.github.io/post/peuler1/" class="post-title">Project Euler - Problema 1</a>
-
-                        <p class="post-meta">
-                            
-                                By <strong class="post-author"> G.Scacco</strong>
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-programming" href="http://gscacco.github.io//categories/programming">programming</a><a class="post-category post-category-clojure" href="http://gscacco.github.io//categories/clojure">clojure</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        
-
-<h1 id="project-euler:4267fac4619cf7d01f2cdbc9ec8918bf">Project Euler</h1>
-
-<p><a href="https://projecteuler.net/">Project Euler</a> è un interessantissimo sito web contenente una raccolta di problemi. Si tratta di sfide matematiche ed informatiche da risolvere tramite l&rsquo;uso di un linguaggio di programmazione a scelta. Molti sono gli utenti registrati che si sono impegnati nelle varie soluzioni e nei più disparati linguaggi: si va dal linguaggio macchia a Java, dal c++ al lisp, etc.</p>
-
-<p>Vorrei proporvi in questo post (e spero in altri) le mie soluzioni in clojure.</p>
-
-<p>Darò per scontata una conoscenza base del linguaggio <a href="http://clojure.org/">clojure</a> e la conoscenza del tool <a href="http://leiningen.org/">Leingen</a></p>
-
-<h2 id="multipli-di-3-e-5:4267fac4619cf7d01f2cdbc9ec8918bf">Multipli di 3 e 5</h2>
-
-<p>Il <a href="https://projecteuler.net/problem=1">problema</a> è così definito:</p>
-
-<blockquote>
-<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
-Find the sum of all the multiples of 3 or 5 below 1000.</p>
-</blockquote>
-
-<p>In italiano:</p>
-
-<blockquote>
-<p>Se elenchiamo tutti i numeri naturali inferiori a 10 che sono multipli di 3 o di 5 otteniamo 3, 5, 6 e 9. La somma di questi multipli è 23.
-Trova la somma di tutti i multipli di 3 e 5 inferiori a 1000.</p>
-</blockquote>
-
-<p>Lanciamo la consolle repl di clojure tramite il comando:</p>
-
-<pre><code>$ lein repl
-</code></pre>
-
-<p>Possiamo verificare se un numero è multiplo di un altro in clojure utilizzando la funzione <em>rem</em> (resto della divisione intera).</p>
-
-<pre><code>user=&gt; (rem 15 5)
-0
-user=&gt; (rem 15 6)
-3
-</code></pre>
-
-<p>Nel primo caso essendo 15 multiplo di 5 il risultato è 0; nel secondo 15 non è multiplo di 6 ed il risultato è 3 (il resto della divisione intera tra 15 e 6).</p>
-
-<p>In clojure esiste il predicato <em>zero?</em> che torna true solo se il suo argomento è 0, false altrimenti:</p>
-
-<pre><code>user=&gt; (zero? 0)
-true
-user=&gt; (zero? 9)
-false
-</code></pre>
-
-<p>A questo punto possiamo definire la nostra prima funzione:</p>
-
-<pre><code>user=&gt; (defn multiplo? [n d] (zero? (rem n d)))
-user=&gt; (multiplo? 15 5)
-true
-user=&gt; (multiplo? 15 6)
-false
-</code></pre>
-
-<p>E per concludere:</p>
-
-<pre><code>user=&gt; (defn multiplo-di-tre-o-cinque? [n] (or (multiplo? n 3) (multiplo? n 5)))
-user=&gt; (multiplo-di-tre-o-cinque? 6)
-true
-user=&gt; (multiplo-di-tre-o-cinque? 10)
-true
-</code></pre>
-
-<p>Possiamo generare la lista dei numeri interi utilizzando la funzione <em>range</em>:</p>
-
-<pre><code>user=&gt; (range 2 10)
-(2 3 4 5 6 7 8 9)
-</code></pre>
-
-<p>e filtrare in base al nostro predicato <em>multiplo-di-tre-o-cinque?</em>:</p>
-
-<pre><code>user=&gt; (filter multiplo-di-tre-o-cinque? (range 2 10))
-(3 5 6 9)
-</code></pre>
-
-<p>fare la somma di una lista è semplice:</p>
-
-<pre><code>user=&gt; (reduce + (filter multiplo-di-tre-o-cinque? (range 2 10)))
-23
-</code></pre>
-
-<p>In questo modo abbiamo riottenuto il valore proposto nel caso semplice nella definizione del problema. Meglio definire, una funzione:</p>
-
-<pre><code>user=&gt; (defn eulero-p1 [max] (reduce + (filter multiplo-di-tre-o-cinque? (range 2 max))))
-</code></pre>
-
-<p>Siamo arrivati alla fine:</p>
-
-<pre><code>user=&gt; (eulero-p1 1000)
-233168
-</code></pre>
-
-<p>Quindi, in sintesi:</p>
-
-<pre><code class="language-clojure">(defn- multiplo? [n d]
-  (zero? (rem n d)))
-
-(defn- multiplo-di-tre-o-cinque? [n]
-  (or
-   (multiplo? n 3)
-   (multiplo? n 5)))
-
-(defn eulero-p1 [max]
-  (reduce + (filter multiplo-di-tre-o-cinque? (range 2 max))))
-
-(eulero-p1 1000)
-</code></pre>
-
-                    </div>
-                </section>
-                
-            </div>
-            
-
-            <div class="footer">
-    <div class="pure-menu pure-menu-horizontal pure-menu-open">
-        <ul>
-            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a></li>
-        </ul>
-    </div>
-</div>
-<script src="http://gscacco.github.io//js/all.min.js"></script>
-        </div>
-    </div>
-</div>
+  
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-62774857-1', 'auto');
-    ga('send', 'pageview');
-
+  ga('create', "UA-62774857-1", 'auto');
+  ga('send', 'pageview');
 </script>
 
+</head>
+
+<body>
+	<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+    
+    
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://gscacco.github.io/">Home</a></li>
+        
+      </ul>
+    </nav>
+
+    
+
+  </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+      <a name="top"></a>
+      
+
+      <div class="posts">
+        
+          <section  class="post">
+            <header class="post-header">
+            
+            <h1 class="post-title">
+              <a href="http://gscacco.github.io/post/peuler1">Project Euler - Problema 1</a>
+            </h1>
+            </header>
+            <p class="post-meta">
+            	
+		          <span class="post-date">
+		            <span class="post-date-day"><sup>12</sup></span><span class="post-date-separator">/</span><span class="post-date-month">May</span> <span class="post-date-year">2015</span>
+		          </span>
+      				
+      				
+      					By <a class="post-author" > G.Scacco</a>
+      				
+              
+                <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>3 min. read</em></span>
+              
+      				
+      					<div class="post-categories">
+				        
+      					
+					        <a class="post-category post-category-programming" href="http://gscacco.github.io//categories/programming">programming</a>
+      					
+					        <a class="post-category post-category-clojure" href="http://gscacco.github.io//categories/clojure">clojure</a>
+      					
+      					</div>
+      				
+            </p>
+            <article class="post-summary">
+            	Project Euler Project Euler è un interessantissimo sito web contenente una raccolta di problemi. Si tratta di sfide matematiche ed informatiche da risolvere tramite l&rsquo;uso di un linguaggio di programmazione a scelta. Molti sono gli utenti registrati che si sono impegnati nelle varie soluzioni e nei più disparati linguaggi: si va dal linguaggio macchina a Java, dal c++ al lisp, etc. Vorrei proporvi in questo post (e spero in altri) le mie soluzioni in clojure.
+            </article>
+			<div class="read-more-link">
+				<a href="http://gscacco.github.io/post/peuler1"><span class="read-more-slashes">//</span>Read More...</a>
+			</div>
+          </section>
+        
+      </div>
+
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2015. All rights reserved. </p>
+</div>
+    </div>
+  </div>
+  
 </body>
 </html>

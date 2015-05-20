@@ -1,200 +1,151 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hugo &middot; G.Scacco</title>
+  <title>
+    Hugo // G.Scacco
+  </title>
 
-    <meta name="description" content="">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <meta name="twitter:card" content="summary">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+
+  <meta property="og:title" content="Hugo" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://gscacco.github.io/tags/hugo/" />
+
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/base-min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://gscacco.github.io//css/redlounge.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,200,100,700,300,500,600,800' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://gscacco.github.io/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://gscacco.github.io/favicon.png">
+
+  
+  <link href="http://gscacco.github.io/tags/hugo/index.xml" rel="alternate" type="application/rss+xml" title="G.Scacco" />
+
     
-    <meta name="twitter:title" content="Hugo &middot; G.Scacco">
-    <meta name="twitter:description" content="">
-
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Hugo &middot; G.Scacco">
-    <meta property="og:description" content="">
-
-    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
-    
-    
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
-    
-
-    <link rel="stylesheet" href="http://gscacco.github.io//css/all.min.css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
-	<script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-</head>
-<body>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/tomorrow-night-bright.min.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 
 
-<div id="layout" class="pure-g">
-    <div class="sidebar pure-u-1 pure-u-md-1-4">
-    <div class="header">
-        <hgroup>
-            <h1 class="brand-title"><a href="http://gscacco.github.io/">G.Scacco</a></h1>
-            <h2 class="brand-tagline"></h2>
-        </hgroup>
+  
 
-        <nav class="nav">
-            <ul class="nav-list">
-                
-                
-            </ul>
-        </nav>
-    </div>
-</div>
+  
 
-    <div class="content pure-u-1 pure-u-md-3-4">
-        <div>
-            
-            <div class="posts">
-                
-                <h1 class="content-subhead">04 May 2015, 12:35</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="http://gscacco.github.io/post/hugo/" class="post-title">hugo - Static Site Generator</a>
-
-                        <p class="post-meta">
-                            
-                                By <strong class="post-author"> G.Scacco</strong>
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-web" href="http://gscacco.github.io//categories/web">web</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        
-
-<h2 id="introduzione:32ab7241d48fcc174c877413a917f8cf">Introduzione</h2>
-
-<p>I <em>Content Management Systems</em> (CMS) comunemente utilizzati dai bloggers sono applicazioni web basate su un db (generalmente MySql) ed implementate in un linguaggio di programmazione di alto livello: php, java, c#, etc.</p>
-
-<p>Il db rappresenta la base dati dentro la quale vengono inseriti gli articoli, le pagine e le altre informazioni necessarie al funzionamento del CMS.</p>
-
-<p>Quando un utente accede tramite il suo browser al sito web, il web server esegue esegue i seguenti passi elementari:</p>
-
-<ol>
-<li>analisi della richiesta</li>
-<li>accesso e query al db</li>
-<li>generazione di una pagina html</li>
-<li>invio della pagina generata</li>
-</ol>
-
-<p>Tutto questo ha un costo non banale in termini di cpu, ram ed io: al crescere del numero degli utenti connessi devono di conseguenza crescere le risorse impiegate.</p>
-
-<p>Il mercato ha dato un prezzo a questa necessità e i vari providers (aruba, hostgator, etc.) richiedono il pagamento di un abbonamento annuale a costo crescente in base alle performances richieste.</p>
-
-<p>Ma tutte queste performances servono <em>veramente</em> ?</p>
-
-<p>Generare ogni volta al volo le pagine html degli articoli è veramente necessario o si potrebbero generare una volta per tutte staticamente ?</p>
-
-<p>La risposta sono gli <em>Static Site Generators</em>.</p>
-
-<h2 id="la-soluzione-hugo:32ab7241d48fcc174c877413a917f8cf">La soluzione hugo</h2>
-
-<p><a href="http://gohugo.io">hugo</a> è uno Static Site Generator scritto in go. Le sue caratteristiche fondamentali sono le seguenti:</p>
-
-<ul>
-<li>Velocità nel rendering statico delle pagine</li>
-<li>Semplicità di utilizzo</li>
-<li>Portabilità (gira praticamente su tutte le piattaforme)</li>
-<li>Flessibilità</li>
-</ul>
-
-<p>Ma soprattutto è open source (SimPL-2.0).</p>
-
-<p>Su arch esiste un pacchetto AUR e quindi per istallarlo basta eseguire:</p>
-
-<pre><code>$ yaourt hugo
-</code></pre>
-
-<p>A questo punto creare un blog è molto semplice:</p>
-
-<pre><code>$ mkdir my-blog
-$ cd my-blog
-$ hugo new site .
-</code></pre>
-
-<p>All&rsquo;interno della cartella my-blog sarà presente un file di configurazione del sito web: config.toml. Questo file va modificato in accordo alle esigenze del caso. Il contenuto del file è abbastanza semplice ed autoesplicativo:</p>
-
-<pre><code>baseurl = &quot;http://yourSiteHere/&quot;
-languageCode = &quot;en-us&quot;
-title = &quot;My New Hugo Site&quot;
-</code></pre>
-
-<p>A questo punto possiamo aggiungere il primo post del blog con il seguente comando:</p>
-
-<pre><code>$ hugo new post/primoarticolo.md
-</code></pre>
-
-<p>Il comando produrrà il seguente file markdown:</p>
-
-<pre><code>+++
-date = &quot;2015-05-05T11:44:32+02:00&quot;
-draft = true
-title = &quot;prova&quot;
-
-+++
-</code></pre>
-
-<p>L&rsquo;unico parametro <em>funzionale</em> dell&rsquo;intestazione è <em>draft</em>: se true hugo non lo inserirà nel sito generato. Il contenuto dell&rsquo;articolo dovrà essere inserito dopo l&rsquo;intestazione e quindi dopo l&rsquo;ultimo +++.</p>
-
-<p>hugo è skinnable con diversi temi disponibili su github. Per utilizzarli basta eseguire il seguente comando:</p>
-
-<pre><code>$ git clone --recursive https://github.com/spf13/hugoThemes themes
-</code></pre>
-
-<p>L&rsquo;applicazione fornisce un piccolo server web che consente la preview del sito. Per attivarlo basta eseguire:</p>
-
-<pre><code>$ hugo server --theme=shiori --buildDrafts
-</code></pre>
-
-<p>L&rsquo;opzione theme consente di scegliere il tema mentre buildDrafts dice a hugo di presentare anche gli articoli con il parametro draft impostato a true.</p>
-
-<p>Una volta completato l&rsquo;articolo si può generare il sito web definitivo con il comando:</p>
-
-<pre><code>$ hugo -t shiori
-</code></pre>
-
-<p>Dopo questo comando la cartella public conterrà i files pronti per essere pubblicati.</p>
-
-                    </div>
-                </section>
-                
-            </div>
-            
-
-            <div class="footer">
-    <div class="pure-menu pure-menu-horizontal pure-menu-open">
-        <ul>
-            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a></li>
-        </ul>
-    </div>
-</div>
-<script src="http://gscacco.github.io//js/all.min.js"></script>
-        </div>
-    </div>
-</div>
+  
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-62774857-1', 'auto');
-    ga('send', 'pageview');
-
+  ga('create', "UA-62774857-1", 'auto');
+  ga('send', 'pageview');
 </script>
 
+</head>
+
+<body>
+	<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+    
+    
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://gscacco.github.io/">Home</a></li>
+        
+      </ul>
+    </nav>
+
+    
+
+  </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+      <a name="top"></a>
+      
+
+      <div class="posts">
+        
+          <section  class="post">
+            <header class="post-header">
+            
+            <h1 class="post-title">
+              <a href="http://gscacco.github.io/post/hugo">hugo - Static Site Generator</a>
+            </h1>
+            </header>
+            <p class="post-meta">
+            	
+		          <span class="post-date">
+		            <span class="post-date-day"><sup>4</sup></span><span class="post-date-separator">/</span><span class="post-date-month">May</span> <span class="post-date-year">2015</span>
+		          </span>
+      				
+      				
+      					By <a class="post-author" > G.Scacco</a>
+      				
+              
+                <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>3 min. read</em></span>
+              
+      				
+      					<div class="post-categories">
+				        
+      					
+					        <a class="post-category post-category-web" href="http://gscacco.github.io//categories/web">web</a>
+      					
+      					</div>
+      				
+            </p>
+            <article class="post-summary">
+            	Introduzione I Content Management Systems (CMS) comunemente utilizzati dai bloggers sono applicazioni web basate su un db (generalmente MySql) ed implementate in un linguaggio di programmazione di alto livello: php, java, c#, etc. Il db rappresenta la base dati dentro la quale vengono inseriti gli articoli, le pagine e le altre informazioni necessarie al funzionamento del CMS. Quando un utente accede tramite il suo browser al sito web, il web server esegue esegue i seguenti passi elementari: analisi della richiesta accesso e query al db generazione di una pagina html invio della pagina generata Tutto questo ha un costo non banale in termini di cpu, ram ed io: al crescere del numero degli utenti connessi devono di conseguenza crescere le risorse impiegate.
+            </article>
+			<div class="read-more-link">
+				<a href="http://gscacco.github.io/post/hugo"><span class="read-more-slashes">//</span>Read More...</a>
+			</div>
+          </section>
+        
+      </div>
+
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2015. All rights reserved. </p>
+</div>
+    </div>
+  </div>
+  
 </body>
 </html>
