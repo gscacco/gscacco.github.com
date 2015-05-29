@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tcp Server on G.Scacco</title>
+    <link>http://gscacco.github.io/tags/tcp-server/</link>
+    <description>Recent content in Tcp Server on G.Scacco</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>it-it</language>
+    <lastBuildDate>Thu, 28 May 2015 15:53:08 +0200</lastBuildDate>
+    <atom:link href="http://gscacco.github.io/tags/tcp-server/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Un server TCP in Clojure</title>
+      <link>http://gscacco.github.io/post/tcp-server/</link>
+      <pubDate>Thu, 28 May 2015 15:53:08 +0200</pubDate>
+      
+      <guid>http://gscacco.github.io/post/tcp-server/</guid>
+      <description>
+
+&lt;h1 id=&#34;scopo:789ccb505c8774f3120cb49df8297321&#34;&gt;Scopo&lt;/h1&gt;
+
+&lt;p&gt;Lo scopo di questo articolo è quello di mostrare l&amp;rsquo;implementazione un server tcp in clojure mediante l&amp;rsquo;uso di un agent.&lt;/p&gt;
+
+&lt;h2 id=&#34;agent:789ccb505c8774f3120cb49df8297321&#34;&gt;Agent&lt;/h2&gt;
+
+&lt;p&gt;Nella documentazione ufficiale (&lt;a href=&#34;http://clojure.org/agents&#34;&gt;Clojure Agents&lt;/a&gt;) l&amp;rsquo;agent viene descritto come segue:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Agents provide shared access to mutable state&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Estrapolando ancora dalla documentazione ufficiale:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Agents are bound to a single storage location for their lifetime, and only allow mutation of that location (to a new state) to occur as a result of an action.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Traducendo in italiano:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Gli agents sono legati ad una singola unità di memorizzazione durante tutta la loro vita. Essi permettono il cambiamento di questa unità di memorizzazione (in un nuovo stato) solo come il risultato di una azione.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Le &lt;em&gt;azioni&lt;/em&gt; sono funzioni asincrone aventi come primo argomento il vecchio stato; il nuovo stato è il ritorno della loro elaborazione.&lt;/p&gt;
+
+&lt;p&gt;L&amp;rsquo;agent è un&amp;rsquo;entità reattiva (esegue in modalità asincrona le funzioni) ma non autonoma: tutto il suo comportamento viene comandato dall&amp;rsquo;&lt;em&gt;esterno&lt;/em&gt;. Vediamo come crearne uno:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def a (agent 0))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;qui viene creato un agent il cui stato iniziale è il valore 0.&lt;/p&gt;
+
+&lt;p&gt;E&amp;rsquo; possibile, ovviamente, sia leggere che modificare lo stato dell&amp;rsquo;agent: la lettura avviene tramite la funzione &lt;a href=&#34;http://clojuredocs.org/clojure.core/deref&#34;&gt;deref&lt;/a&gt; mentre la modifica avviene tramite il ritorno delle funzioni &lt;em&gt;inviate&lt;/em&gt; all&amp;rsquo;agent (vedi &lt;a href=&#34;http://clojuredocs.org/clojure_core/clojure.core/send&#34;&gt;send&lt;/a&gt; e &lt;a href=&#34;http://clojuredocs.org/clojure_core/clojure.core/send-off&#34;&gt;send-off&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Ad esempio, definiamo la seguente funzione:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn f [vecchio-stato]
+	(do (Thread/sleep 5000)
+	    (inc vecchio-stato)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ed inviamola all&amp;rsquo;agent a:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(send a f)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;L&amp;rsquo;esecuzione della funzione send è immediato. Dereferenziando l&amp;rsquo;agent a (prima della scadenza del timeout di 5 secondi) troveremmo il valore 0. Solo dopo la scadenza del timeout il valore verrebbe incrementato ad 1.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;user =&amp;gt; (send a f)
+user =&amp;gt; @a
+0
+user =&amp;gt; @a
+0
+# dopo 5 secondi
+user =&amp;gt; @a
+1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;il-server-tcp:789ccb505c8774f3120cb49df8297321&#34;&gt;Il server TCP&lt;/h1&gt;
+
+&lt;p&gt;Utilizzeremo al nostro scopo le classi messe a disposizione dalla JDK. In particolare, faremo uso della classe &lt;a href=&#34;http://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html&#34;&gt;ServerSocket&lt;/a&gt;. Ma prima di tutto definiamo il nostro agent:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(agent {:server nil :socket nil})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Si tratta di una mappa composta di due soli elementi: il server ed il socket. Inizialmente entrambi sono valorizzati a nil.&lt;/p&gt;
+
+&lt;p&gt;L&amp;rsquo;idea è di realizzare il tutto all&amp;rsquo;interno di una funzione ed effettuare i seguenti passi elementari:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Creare l&amp;rsquo;agent con il suo stato iniziale (tutto a nil)&lt;/li&gt;
+&lt;li&gt;Inviare all&amp;rsquo;agent una funzione che crei il ServerSocket&lt;/li&gt;
+&lt;li&gt;Inviare all&amp;rsquo;agent una funzione che si fermi in accept&lt;/li&gt;
+&lt;li&gt;Inviare all&amp;rsquo;agent una fiunzione che stampi a schermo la stringa ricevuta&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Le tre funzioni ai punti 2, 3 e 4 devono avere come primo parametro lo stato dell&amp;rsquo;agent e restituire il nuovo stato. Iniziamo realizzando la prima:&lt;/p&gt;
+
+&lt;h2 id=&#34;implementazione:789ccb505c8774f3120cb49df8297321&#34;&gt;Implementazione&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns tcp-server
+  (:import (java.io InputStreamReader BufferedReader))
+  (:import (java.net ServerSocket)))
+  
+(defn create-server [stato port]
+  (let [ss (ServerSocket. port)]
+    {:server ss :socket nil}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;La definizione della funzione &lt;em&gt;create-server&lt;/em&gt; fa esattamente quanto detto: crea un server socket sulla porta fornita in input e restituisce il nuovo stato.&lt;/p&gt;
+
+&lt;p&gt;Creiamo ora la funzione di cui al punto 3:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn accept-connection [stato]
+  (let [ss (stato :server)
+        socket (.accept ss)]
+    {:server ss :socket socket}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Anche qui il funzionamento è abbastanza semplice:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;preleviamo l&amp;rsquo;oggetto ServerSocket dal vecchio stato (essendo una mappa basta riferire la chiave :server)&lt;/li&gt;
+&lt;li&gt;invochiamo il metodo &lt;em&gt;accept&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;restituiamo il nuovo stato con socket valorizzato&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;L&amp;rsquo;ultima funzione da realizzare è quella di cui al punto 4:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn print-string [stato]
+  (let [str (-&amp;gt;&amp;gt; (stato :socket)
+                 (.getInputStream)
+                 (InputStreamReader.)
+                 (BufferedReader.)
+                 (.readLine))]
+    (println str)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Questa funzione è un po&amp;rsquo; più lunga solo perché, per leggere una riga di testo dal socket, dobbiamo utilizzare la classe BufferedReader.&lt;/p&gt;
+
+&lt;p&gt;A questo punto manca solo la definizione della funzione principale:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn tcp-server [port]
+  (let [tcp-agent (agent {:server nil :socket nil})
+        send-tcp (partial send-off tcp-agent)]
+    (do (send-tcp create-server port)
+        (send-tcp accept-connection)
+        (send-tcp print-string)
+        tcp-agent)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Questa funzione ha un solo parametro di input: il numero della porta su cui creare il server tcp. La sua definizione è abbastanza semplice ma vorrei evidenziare alcuni punti:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;all&amp;rsquo;interno della let ho creato un binding con una funzione parziale &lt;em&gt;send-tcp&lt;/em&gt; per ridurre il codice necessario&lt;/li&gt;
+&lt;li&gt;le funzioni inviate riceveranno in automatico come primo parametro lo stato dell&amp;rsquo;agent&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Per domande o dubbi vi prego di utilizzare il form disqus sottostante.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
