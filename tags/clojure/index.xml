@@ -6,8 +6,88 @@
     <description>Recent content in Clojure on G.Scacco</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>it-it</language>
-    <lastBuildDate>Thu, 28 May 2015 15:53:08 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2015 14:31:23 +0200</lastBuildDate>
     <atom:link href="http://gscacco.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Project Euler - Problema 3</title>
+      <link>http://gscacco.github.io/post/peuler3/</link>
+      <pubDate>Mon, 08 Jun 2015 14:31:23 +0200</pubDate>
+      
+      <guid>http://gscacco.github.io/post/peuler3/</guid>
+      <description>
+
+&lt;h2 id=&#34;definizione-del-problema:c9c4cd2dcfb8ac71a29431c8e1a00862&#34;&gt;Definizione del problema&lt;/h2&gt;
+
+&lt;p&gt;Per prima cosa la definizione del problema è la seguente:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The prime factors of 13195 are 5, 7, 13 and 29.&lt;/p&gt;
+
+&lt;p&gt;What is the largest prime factor of the number 600851475143 ?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;La traduzione in italiano recita:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;I fattori primi di 13195 sono 5, 7, 13 e 29.&lt;/p&gt;
+
+&lt;p&gt;Quale è il più grande fattore primo del numero 600851475143 ?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;verifica-di-primalità:c9c4cd2dcfb8ac71a29431c8e1a00862&#34;&gt;Verifica di primalità&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Un numero è primo se e solo se è divisibile solo per 1 e per se stesso.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Sono stati proposti numerosi metodi per verificare la primalità di un numero (vedi &lt;a href=&#34;http://it.wikipedia.org/wiki/Test_di_primalit%C3%A0&#34;&gt;Test Primalità&lt;/a&gt;); alcuni sono efficienti ma molto complessi da implementare.
+Io utilizzerò un metodo semplice anche se poco efficiente: dato n il numero di cui si vuole verificare la primalità, si eseguono i seguenti passi&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;si elencano tutti i numeri compresi tra 2 e \(\sqrt{n}\)&lt;/li&gt;
+&lt;li&gt;si calcola il resto della divisione intera con n&lt;/li&gt;
+&lt;li&gt;si verifica che tutti i resti siano diversi da zero&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;codifica-in-clojure:c9c4cd2dcfb8ac71a29431c8e1a00862&#34;&gt;Codifica in clojure&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn prime? [n]
+  (let [max (Math/sqrt n)
+        v (range 2 (inc max))
+        mv (map #(pos? (rem n %)) v)]
+    (every? true? mv)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Possiamo verificare in repl:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;user =&amp;gt; (prime? 12)
+false
+user =&amp;gt; (prime? 167)
+true
+user =&amp;gt; (prime? 123)
+true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;soluzione:c9c4cd2dcfb8ac71a29431c8e1a00862&#34;&gt;Soluzione&lt;/h2&gt;
+
+&lt;p&gt;A questo punto applichiamo il predicato &lt;em&gt;prime?&lt;/em&gt; appena definito. Procediamo nel seguente modo:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;definiamo una costante con il numero del problema&lt;/li&gt;
+&lt;li&gt;calcoliamo la radice quadrata anche per lui&lt;/li&gt;
+&lt;li&gt;creiamo un range decrescente&lt;/li&gt;
+&lt;li&gt;preleviamo solo i numeri primi divisori&lt;/li&gt;
+&lt;li&gt;prendiamo il primo&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def p3-number 600851475143)
+(def sq-p3-number (int (Math/sqrt p3-number)))
+
+(def p3-solution (-&amp;gt;&amp;gt; (range sq-p3-number 2 -1)
+                      (filter #(and (prime? %) (zero? (rem p3-number %))))
+                      first))
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Un server TCP in Clojure</title>
